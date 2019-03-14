@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="full-screen" content="yes">
+  <meta name="x5-fullscreen" content="true">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"> -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/material-design-icons/3.0.1/iconfont/material-icons.css">
+  <!-- <script defer src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script> -->
+  <title>诚合商城</title>
+</head>
+<script>
+  //只在app中启用
+  window.baseUrl = '';//http://1445671444.ngrok.xiaomiqiu.cn
+  window.searchadvurl = 'http://wsjs.saic.gov.cn/txnT01.do?y7bRbp=qmFAF8JVaTwmlSC0CeMSGo4JF94IqkFHx2lrGxyJ7G_uP0OkdagVRg4RF03dNNklacVSHM.9UTZxY3avTJbw0xQY1d_Jx7XvA9pTil1lQ4MQZDpnAVtwGCkPRYrEe.MONXZqgm988FjGaSUHStYXxu6PrzOiouDRO8jaWZuTNvWVrVk8'
+  window.androidUrl = 'http://app.chengheguoji.cn/upload/chenghe.apk';
+  window.iosUrl = '';
+  window.updateUrl = window.baseUrl+'/index.php?s=/appapi/login/inspectUpdate';
+</script>
+
+<body>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+</body>
+<script>
+  const appname = '诚合商城';
+  document.oncontextmenu = function () {
+    return false;
+  }
+  document.onselectstart = function () {
+    return false;
+  }
+  function onBackKeyDown() {
+    if (window.location.href.indexOf("#/index") < 0) {
+
+      window.history.back()
+    } else {
+      plus.ui.toast("再次点击退出应用", 1500)
+      plus.key.removeEventListener("backbutton", onBackKeyDown, false); //注销返回键
+      //1秒后重新注册
+      var intervalID = window.setInterval(
+        function () {
+          window.clearInterval(intervalID);
+          plus.key.addEventListener("backbutton", onBackKeyDown, false); //返回键
+        },
+        1500
+      );
+    }
+
+  }
+  var wxChannel = null; // 微信支付 
+  var aliChannel = null; // 支付宝支付 
+  var channel = null; //支付通道 
+  var shares = null;
+  var auths = {};
+  localStorage.setItem('device_type', getDevice())
+  function plusReady() {
+    localStorage.setItem('device_type', getDevice())
+    plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+      wgtVer = inf.version;
+      getVersion(wgtVer, getDevice());
+    });
+    plus.key.addEventListener('backbutton', onBackKeyDown, false)
+    plus.payment.getChannels(
+      function (channels) {
+        for (var i in channels) {
+          if (channels[i].id == 'wxpay') {
+            wxChannel = channels[i]
+          } else {
+            aliChannel = channels[i]
+          }
+        }
+        //console.log('plusReady payment' + channels.length);
+      },
+      function (e) {
+        //console.log("获取支付通道列表失败：" + e.message);
+      }
+    )
+    plus.oauth.getServices(function (services) {
+      auths = {};
+      for (var i in services) {
+        var t = services[i];
+        auths[t.id] = t;
+      }
+    }, function (e) {
+      //alert("获取第三方登陆列表失败：" + e.message + " - " + e.code);
+    });
+
+    plus.share.getServices(function (s) {
+      shares = {};
+      for (var i in s) {
+        var t = s[i];
+        shares[t.id] = t;
+      }
+    }, function (e) {
+      //console.log("获取分享服务列表失败：" + e.message);
+    });
+
+  }
+  if (location.href.indexOf("http") < 0) {
+    if (window.plus) {
+      plusReady();
+    } else {
+      document.addEventListener("plusready", plusReady, false);
+    }
+  }
+
+  function getVersion(version, device_type) {
+    delfile();
+    var xhr = new XMLHttpRequest();
+    let url = window.updateUrl + '&version=' + version + '&device_type=' + device_type;
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+      // readyState == 4说明请求已完成
+      if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+        // 从服务器获得数据 
+        let res = JSON.parse(xhr.responseText);
+        if (res.code == 1) {
+          plus.nativeUI.confirm("检查到有新版本，是否更新?", function (e) {
+            if (e.index == 0) {
+              var url = ""; // 下载文件地址
+              if (getDevice() == 'android') {
+                downup(res.data);
+              } else if (getDevice() == 'ios') {
+                plus.runtime.openURL(res.data);
+              }
+            }
+          });
+        } else {
+          delfile();
+        }
+      }
+    };
+    xhr.send();
+  }
+
+  var updialog;
+  function downup(url) {
+    updialog = plus.nativeUI.showWaiting("正在更新...")
+    var down = plus.downloader.createDownload(url, {
+      filename: "_doc/update/"
+    }, function (d, status) {
+      if (status == 200) {
+        var path = d.filename;
+        plus.runtime.install(path);
+      } else {
+        plus.nativeUI.alert("下载更新失败！");
+      }
+      updialog.close();
+    });
+    down.addEventListener("statechanged", onStateChanged, false);
+    down.start();
+  }
+
+  function onStateChanged(download, status) {
+    var percentage = download.downloadedSize / download.totalSize * 100;
+    if (percentage) {
+      percentage = percentage.toFixed(2);
+      if (percentage) {
+        updialog.setTitle('已下载：' + percentage + '%');
+      }
+    }
+  }
+
+
+  function delfile() {
+    plus.io.requestFileSystem(plus.io.PRIVATE_DOC, function (fs) {
+      // 可通过fs进行文件操作 
+      var directoryReader = fs.root.createReader();
+      directoryReader.readEntries(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].name == 'update') {
+            entries[i].removeRecursively(function (entry) { }, function (e) { });
+            break;
+          }
+        }
+      }, function (e) {
+        //alert("Read entries failed: " + e.message);
+      });
+    }, function (e) {
+      //alert("Request file system failed: " + e.message);
+    });
+  }
+
+  function getDevice() {
+    if (typeof plus != 'undefined') {
+      return plus.os.name.toLowerCase()
+    } else {
+      return 'web'
+    }
+  }
+
+  function isWeiXin() {
+    //window.navigator.userAgent属性包含了浏览器类型、版本、操作系统类型、浏览器引擎类型等信息，这个属性可以用来判断浏览器类型
+    var ua = window.navigator.userAgent.toLowerCase();
+    //通过正则表达式匹配ua中是否含有MicroMessenger字符串
+    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+</script>
+
+</html>

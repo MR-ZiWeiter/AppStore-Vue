@@ -1,0 +1,588 @@
+body,
+div,
+span,
+header,
+footer,
+nav,
+section,
+aside,
+article,
+ul,
+dl,
+dt,
+dd,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+b,
+textarea,
+button,
+input,
+select,
+figure,
+figcaption,
+    {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-style: normal;
+    text-decoration: none;
+    border: none;
+    color: #333;
+    font-weight: normal;
+    font-family: "Microsoft Yahei";
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.3rem;
+    &:hover {
+        outline: none;
+    }
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="search"],
+input[type="reset"] {
+    -webkit-appearance: none;
+}
+
+textarea {
+    -webkit-appearance: none;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #F5F5F5;
+}
+
+.clear:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.clear {
+    zoom: 1;
+}
+
+.back_img {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.margin {
+    margin: 0 auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.paddingTop {
+    padding-top: 1.95rem;
+}
+
+@keyframes backOpacity {
+    0% {
+        opacity: 1
+    }
+    25% {
+        opacity: .5
+    }
+    50% {
+        opacity: 1
+    }
+    75% {
+        opacity: .5
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+.animation_opactiy {
+    animation: backOpacity 2s ease-in-out infinite;
+}
+
+.font-size-13 {
+    font-size: 0.26rem !important;
+}
+
+.font-size-12 {
+    font-size: 0.24rem !important;
+}
+
+.font-size-11 {
+    font-size: 0.22rem;
+}
+
+.font-size-14 {
+    font-size: 0.28rem;
+}
+
+.font-size-15 {
+    font-size: 0.3rem;
+}
+
+.font-size-16 {
+    font-size: 0.32rem;
+}
+
+.font-size-18 {
+    font-size: 0.36rem;
+}
+
+.font-size-10 {
+    font-size: 0.2rem;
+}
+
+.rows {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.col-50 {
+    width: 50%;
+}
+
+.col-25 {
+    width: 25%;
+}
+
+.col-20 {
+    width: 20%;
+}
+
+.col-30 {
+    width: 30%;
+}
+
+.col-60 {
+    width: 60%;
+}
+
+.text-color-999 {
+    color: #999;
+}
+
+.text-color-666 {
+    color: #666;
+}
+
+.text-color-333 {
+    color: #333;
+}
+
+.text-color-black {
+    color: #000;
+}
+
+.text-color-red {
+    color: #F9340E;
+}
+
+.green {
+    color: #09bb07;
+}
+
+.flex-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.p-10 {
+    padding: 0.2rem;
+}
+
+.p-h-10 {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+
+.p-v-10 {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.p-b-10 {
+    padding-bottom: 0.2rem;
+}
+
+.m-b-10 {
+    margin-bottom: 0.2rem;
+}
+.m-t-10 {
+    margin-top: 0.2rem;
+}
+.no-margin {
+    margin: 0 !important;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.price {
+    color: #ff4444;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.img-size-box {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    padding: 0.2rem;
+    .bg-img {
+        padding-top: 100%;
+        width: 100%;
+        -webkit-background-size: 100% !important;
+        background-size: 100% !important;
+        background-repeat: no-repeat;
+        background-color: #eee;
+    }
+}
+
+.p-a-all {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.bg-white {
+    background: #fff;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+//header
+.vux-header .vux-header-title {
+    height: 0.89rem !important;
+    line-height: 0.89rem !important;
+    font-size: 0.4rem !important;
+}
+
+.vux-header .vux-header-left,
+.vux-header .vux-header-left .vux-header-back {
+    left: 0.2rem !important;
+    top: 0.35rem !important;
+    font-size: 0.3rem !important;
+}
+
+.vux-header .vux-header-left .left-arrow:before {
+    width: 0.25rem !important;
+    height: 0.25rem !important;
+    border-width: 2px 0 0 2px !important;
+    top: 0.3rem !important;
+    left: 0.3rem !important;
+    border-color: #333 !important;
+}
+
+.vux-header.white .vux-header-left .left-arrow:before {
+    border-color: #fafafa !important;
+}
+
+.vux-header .vux-header-left .left-arrow {
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+    top: -0.35rem !important;
+    left: -0.2rem !important;
+    display: flex;
+    align-items: center;
+}
+
+.vux-header .vux-header-right {
+    font-size: 0.3rem !important;
+    line-height: 0.6rem !important;
+}
+
+.weui-toast__content {
+    font-size: 0.3rem !important;
+    color: #fff;
+    padding: 0.15rem 0.4rem !important;
+}
+
+.weui-icon_toast.weui-loading {
+    margin: 30px 0 0;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+// 单选
+.vux-checker-item {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    position: absolute;
+}
+
+.check-item-selected {
+    border-color: #ff4444;
+    background: #ff4444;
+}
+
+.check-item-selected::before {
+    content: "";
+    position: absolute;
+    width: 0.1rem;
+    height: 0.2rem;
+    color: #fff;
+    border-bottom: 3px solid;
+    border-right: 3px solid;
+    top: 30%;
+    left: 0.2rem;
+    transform-origin: center;
+    transform: translate(-50%, -30%) rotate(45deg);
+    -webkit-transform: translate(-50%, -30%) rotate(45deg);
+}
+
+.vux-check-icon i {
+    font-size: 0.4rem;
+}
+
+.vux-check-icon>.weui-icon-success:before,
+.vux-check-icon>.weui-icon-success-circle:before {
+    color: #ff4444;
+}
+
+.vux-loading .weui-toast {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.vux-swipeout-button {
+    font-size: 0.26rem !important;
+}
+
+.weui-dialog__hd {
+    padding: 0.2rem !important;
+}
+
+.weui-dialog__title {
+    font-size: 0.26rem !important;
+}
+
+.weui-dialog__bd {
+    font-size: 0.32rem !important;
+}
+
+.weui-dialog__ft {
+    line-height: 0.5rem;
+    font-size: 0.3rem;
+    padding: 0.2rem 0;
+}
+
+.weui-dialog {
+    max-width: 80% !important;
+    min-width: 50% !important;
+    width: 80% !important;
+}
+
+.vux-swipeout-button-box>div>button:nth-child(1) {
+    margin-right: -10px;
+}
+
+.vux-slider>.vux-indicator>a>.vux-icon-dot,
+.vux-slider .vux-indicator-right>a>.vux-icon-dot,
+.weui-cell_select .weui-cell__bd:after {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+.weui-icon-success,
+.vux-check-icon>.weui-icon-success:before,
+.vux-check-icon>.weui-icon-success-circle:before {
+    color: #ff4444 !important;
+}
+
+.weui-actionsheet__cell {
+    padding: 0.2rem 0 !important;
+    font-size: 0.3rem !important;
+}
+
+.weui-mask_transparent {
+    z-index: 3500 !important;
+}
+
+.vux-tab {
+    height: 0.8rem !important;
+    .vux-tab-item {
+        font-size: 0.24rem !important;
+        line-height: 0.8rem !important;
+        height: 0.8rem !important;
+    }
+    .vux-tab-selected {
+        color: #ff4444 !important;
+        border-color: #ff4444 !important;
+    }
+    .vux-tab-ink-bar,
+    .vux-tab-bar-inner {
+        background: #ff4444 !important;
+    }
+}
+
+.vux-tab-container,
+.vux-tab-wrap {
+    height: 0.8rem !important;
+}
+
+.weui-cell {
+    padding: 0.2rem 0.3rem !important;
+}
+
+.vux-input-icon.weui-icon-warn:before,
+.vux-input-icon.weui-icon-success:before,
+.weui-icon-clear {
+    font-size: 0.3rem !important;
+}
+
+.vux-popup-header {
+    height: 0.8rem !important;
+    line-height: 0.8rem !important;
+    font-size: 0.4rem !important;
+}
+
+.vux-popup-header-right,
+.weui-cells_radio .weui-check:checked+.weui-icon-checked:before,
+.weui-cells_radio .weui-check:checked+.weui-icon-checked:before {
+    color: #ff4444 !important;
+}
+
+.vux-timeline-item-content {
+    padding: 0 0 0.3rem 0.4rem !important;
+}
+
+.vux-timeline {
+    padding: 0.2rem 0.3rem !important;
+    display: flex;
+    flex-wrap: wrap;
+    h4,
+    p {
+        width: 100%;
+    }
+}
+
+.vux-timeline-item-head-first {
+    width: 0.3rem !important;
+    height: 0.3rem !important;
+}
+
+.vux-timeline-item-checked.weui-icon-success-no-circle::before {
+    font-size: 0.24rem !important;
+}
+
+.weui-icon-success-no-circle {
+    color: #ff4444 !important;
+}
+
+.vux-timeline-item-color,
+.vux-timeline-item-tail {
+    background-color: #ff4444 !important;
+}
+
+.vux-timeline-item-tail {
+    left: 10px !important;
+    width: 0.03rem !important;
+}
+
+.vux-timeline-item-head {
+    width: 0.2rem !important;
+    height: 0.2rem !important;
+}
+
+.vux-prompt {
+    padding: 0.3rem 0;
+    .vux-prompt-msgbox {
+        font-size: 0.3rem;
+    }
+}
+
+.weui-dialog__btn_primary {
+    color: #ff4444 !important;
+}
+
+input,button,select,textarea{outline:none}

@@ -1,0 +1,35 @@
+.vux-header .vux-header-title {
+    height: 0.89rem !important;
+    line-height: 0.89rem !important;
+    font-size: 0.4rem !important;
+  }
+  .vux-header .vux-header-left,
+  .vux-header .vux-header-left .vux-header-back {
+    left: 0.2rem !important;
+    top: 0.35rem !important;
+    font-size: 0.3rem !important;
+  }
+  .vux-header .vux-header-left .left-arrow:before {
+    width: 0.25rem !important;
+    height: 0.25rem !important;
+    border-width: 2px 0 0 2px !important;
+    top: 0.3rem !important;
+    left: 0.3rem !important;
+    border-color: #333 !important;
+  }
+  .vux-header.white .vux-header-left  .left-arrow:before {
+    border-color: #333 !important;
+  }
+  
+  .vux-header .vux-header-left .left-arrow {
+    width: 0.9rem !important;
+    height: 0.9rem !important;
+    top: -0.35rem !important;
+    left: -0.2rem !important;
+    display: flex;
+    align-items: center;
+  }
+  .vux-header .vux-header-right {
+    font-size: 0.3rem !important;
+    line-height: 0.6rem !important;
+  }
