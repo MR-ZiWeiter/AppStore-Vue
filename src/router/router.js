@@ -89,7 +89,11 @@ const forgetpaypwd = r => require.ensure([], () => r(require('../page/user/forge
 const wholesale = r => require.ensure([], () => r(require('../page/special/wholesale')), 'wholesale')
 const download = r => require.ensure([], () => r(require('../page/home/download')), 'download')
 const argu = r => require.ensure([], () => r(require('../page/home/argu')), 'argu')
-
+/**
+ * @time [2019-3-15]
+ * 新增交易模块
+ */
+import TransactionRouter from './transaction'
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -356,7 +360,9 @@ export default [{
             path:'/recommend',
             component: recommend,
             notLogin:true
-        }
-        
+        },
+        // 新增的页面以及路由配置规则
+        // @time [2019-3-15]
+        ...TransactionRouter
     ]
 }]
